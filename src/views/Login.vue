@@ -1,34 +1,26 @@
 <template>
-<div class="back">
+<div>
+<div class='bold-line'></div>
+<div class='container'>
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <div class='welcome'>LogIn</div>
+      <div class='subtitle'>Welcome please enter your credentials</div>
 
-<div class="background-wrap">
-  <div class="background"></div>
-</div>
+      <form id="accesspanel" action="login" method="post" @submit.prevent="pressed">
+      <div class='input-fields'>
+        <input type='email' placeholder='Email' class='input-line full-width' v-model="email" :counter="20" :rules="emailRules" label="Email" required />
+        <input type='password' placeholder='Password' class='input-line full-width' v-model="password" :rules="passwordRules" label="Password" required/>
 
-<form id="accesspanel" action="login" method="post" @submit.prevent="pressed">
-  <h1 id="litheader">LOGIN</h1>
-  <div class="inset">
-    <p>
-      <input type="text" name="username" id="email" placeholder="Email address" v-model="email" :counter="20" :rules="emailRules" label="Email" required>
-    </p>
-    <p>
-      <input type="password" name="password" id="password" placeholder="Access code" v-model="password" :rules="passwordRules" label="Password" required>
-    </p>
-    <div style="text-align: center;">
-      <div class="checkboxouter">
-        <input type="checkbox" name="rememberme" id="remember" value="Remember">
-        <label class="checkbox"></label>
       </div>
-      <label for="remember">Remember me</label>
+      <div class='spacing'>or continue to <span class='highlight'><router-link to="/signup"> Sign up</router-link></span></div>
+      <div><button class='ghost-round full-width' @click="pressed">LOG IN</button></div>
+      </form>
+      <div class="error" v-if="error">{{error.message}}</div>
     </div>
-    <input class="loginLoginValue" type="hidden" name="service" value="login" />
-    <router-link to="/signup"><v-btn color="warning" @click="resetValidation">SignUp</v-btn></router-link>
   </div>
-  <p class="p-container">
-    <input type="submit" name="Login" id="go" value="Authorize" @click="pressed">
-  </p>
-</form>
-<div class="error" v-if="error">{{error.message}}</div>
+</div>
 </div>
 </template>
 
@@ -65,407 +57,218 @@ export default {
 </script>
 
 <style >
-@import url(https://fonts.googleapis.com/css?family=Audiowide);
-
-::-moz-selection {
-    background: #cc0000;
-    text-shadow: none;
-}
-
-::selection {
-    background: #cc0000;
-    text-shadow: none;
-}
-
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
-  border: 0;
-  font: inherit;
-  font-size: 100%;
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
+body,
+html {
   margin: 0;
-  padding: 0;
-  vertical-align: baseline;
-  text-rendering: optimizeLegibility;
-}
-
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
-  display: block;
-}
-
-html,body {
   height: 100%;
-  margin: 0;
-  padding: 0;
 }
 
-.back {
-  background: #1b1b1b;
-  color: #FFF;
-  font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-size: 12px;
-  line-height: 1;
+input {
+  border: none;
 }
 
-.background-wrap {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.background {
-  background: url('https://myrror.co/etc/419062774_1385132057.jpg');
-  background-position: center;
-  background-size: cover;
-  filter: blur(10px);
-  height: 105%;
-  position: relative;
-  width: 105%;
-  right: -2.5%;
-  left: -2.5%;
-  top: -2.5%;
-  bottom: -2.5%;
-}
-
-* {
-  box-sizing: border-box;
-  cursor: default;
+button:focus {
   outline: none;
 }
 
-form {
-  background: #111;
-  border: 1px solid #191919;
-  border-radius: .4em;
-  bottom: 0;
-  box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
-  height: 280px;
-  left: 0;
-  margin: auto;
-  overflow: hidden;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 300px;
+::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.65);
 }
 
-form:after {
-  background: linear-gradient(to right, #111111, #444444, #b6b6b8, #444444, #2F2F2F, #272727);
-  content: "";
-  display: block;
-  height: 1px;
-  left: 50px;
-  position: absolute;
-  top: 0;
-  width: 150px;
+::-webkit-input-placeholder .input-line:focus +::input-placeholder {
+  color: #fff;
 }
 
-form:before {
-  border-radius: 50%;
-  box-shadow: 0 0 6px 4px #fff;
-  content: "";
-  display: block;
-  height: 5px;
-  left: 34%;
-  position: absolute;
-  top: -7px;
-  width: 8px;
+.highlight {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  cursor: pointer;
+  transition: color .2s ease;
 }
 
-.inset {
-  border-top: 1px solid #19191a;
-  padding: 20px;
+.highlight:hover {
+  color: #fff;
+  transition: color .2s ease;
 }
 
-form h1 {
-  font-family: 'Audiowide';
-  border-bottom: 1px solid #000;
-  font-size: 18px;
-  padding: 15px 0;
-  position: relative;
+.spacing {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  height: 120px;
+  font-weight: 300;
   text-align: center;
-  text-shadow: 0 1px 0 #000;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.65)
 }
 
-form h1 {
-  color: #FFbb00;
-  font-family: Audiowide;
-  font-weight: normal;
+.input-line:focus {
+  outline: none;
+  border-color: #fff;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
 }
 
-form h1.poweron {
-  color: #ffffff;
-  transition: all 0.5s;
-  animation: flicker 1s ease-in-out 1 alternate, neon 1.5s ease-in-out infinite alternate;
-  animation-delay: 0s, 1s;
+.ghost-round {
+  cursor: pointer;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 25px;
+  color: rgba(255, 255, 255, 0.65);
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  font-size: 19px;
+  font-size: 1.2rem;
+  font-family: roboto;
+  font-weight: 300;
+  line-height: 2.5em;
+  margin-top: auto;
+  margin-bottom: 25px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
 }
 
-form h1:after {
-  position: absolute;
-  width: 250px;
-  height: 180px;
-  content: "";
-  display: block;
-  pointer-events: none;
-  top: 0;
-  margin-left: 138px;
-  transform-style: flat;
-  transform: skew(20deg);
-
-  background: -moz-linear-gradient(top, hsla(0,0%,100%,0.1) 0%, hsla(0,0%,100%,0) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsla(0,0%,100%,0.2)), color-stop(100%,hsla(0,0%,100%,0)));
-  background: -webkit-linear-gradient(top, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
-  background: -o-linear-gradient(top, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
-  background: -ms-linear-gradient(top, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#42ffffff', endColorstr='#00ffffff',GradientType=0 );
-  background: linear-gradient(to bottom, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
-
+.ghost-round:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
 }
 
-input[type=text], input[type=password] {
-  background: linear-gradient(#1f2124,#27292c);
-  border: 1px solid #222;
-  border-radius: .3em;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.1);
-  color: #FFF;
-  font-size: 13px;
-  margin-bottom: 20px;
-  padding: 8px 5px;
+.input-line {
+  background: none;
+  margin-bottom: 10px;
+  line-height: 2.4em;
+  color: #fff;
+  font-family: roboto;
+  font-weight: 300;
+  letter-spacing: 0px;
+  letter-spacing: 0.02rem;
+  font-size: 19px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.full-width {
   width: 100%;
 }
 
-input[type=text]:disabled, input[type=password]:disabled {
-	color: #999;
+.input-fields {
+  margin-top: 25px;
 }
 
-label[for=remember] {
-  color: #bbb;
-  display: inline-block;
-  height: 20px;
-  line-height: 20px;
-  vertical-align: top;
-  padding: 0 0 0 5px;
-}
-
-.p-container {
-  padding: 0 20px 20px;
-}
-
-.p-container:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
-.p-container span {
-  color: #0d93ff;
-  display: block;
-  float: left;
-  padding-top: 8px;
-}
-
-input[type=submit] {
-  background: #fb0;
-  border: 1px solid rgba(0,0,0,0.4);
-  border-radius: .3em;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 10px 10px rgba(255,255,255,0.1);
-  color: #873C00;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: bold;
-  height: 40px;
-  padding: 5px 20px;
-  width: 100%;
-}
-
-.denied {
-  color: white !important;
-  text-shadow: 0 0 1px black;
-  background: #EE0000 !important;
-}
-
-input[type=submit]:hover, input[type=submit]:focus {
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -10px 10px rgba(255,255,255,0.1);
-}
-
-input[type=text]:hover:not([disabled]), 
-input[type=text]:focus, 
-input[type=password]:hover:not([disabled]), 
-input[type=password]:focus, 
-label:hover ~ input[type=text], 
-label:hover ~ input[type=password] {
-  background: #27292c;
-}
-
-input[type="checkbox"] {
-  opacity: 0;
-  background: red;
-  position: absolute;
-  cursor: pointer;
-  z-index: 1;
+.container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: #eee;
   height: 100%;
+}
+
+.content {
+  padding-left: 25px;
+  padding-right: 25px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  z-index: 5;
+}
+
+.welcome {
+  font-weight: 200;
+  margin-top: 75px;
+  text-align: center;
+  font-size: 40px;
+  font-size: 2.5rem;
+  letter-spacing: 0px;
+  letter-spacing: 0.05rem;
+}
+
+.subtitle {
+  text-align: center;
+  line-height: 1em;
+  font-weight: 100;
+  letter-spacing: 0px;
+  letter-spacing: 0.02rem;
+}
+
+.menu {
+  background: rgba(0, 0, 0, 0.2);
   width: 100%;
-  left: 0;
-  top: 0;
+  height: 50px;
 }
 
-.checkboxouter {
-  height: 20px;
-  width: 20px;
-  border-radius: 3px;
-  background-color: #000;
+.window {
+  z-index: 100;
+  color: #fff;
+  font-family: roboto;
   position: relative;
-  display: inline-block;
-  border: 2px solid #555;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  height: 560px;
+  width: 360px;
+  background: #fff;
+  background: url('https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823') top left no-repeat;
 }
 
-.checkbox {
+.overlay {
+  background: -webkit-linear-gradient(#8CA6DB, #B993D6);
+  background: linear-gradient(#8CA6DB, #B993D6);
+  opacity: 0.85;
+  filter: alpha(opacity=85);
+  height: 560px;
   position: absolute;
-  border-bottom: 2px solid #333;
-  border-right: 2px solid #333;
-  background-color: transparent;
-  height: 10px;
-  width: 5px;
+  width: 360px;
+  z-index: 1;
+}
+
+.bold-line {
+  background: #e7e7e7;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
   margin: auto;
-  left: 50%;
-  transform: rotate(45deg);
-  transform-origin: -35% 30%;
-  transition: all 0.2s;
+  width: 100%;
+  height: 360px;
+  z-index: 1;
+  opacity:0.1;
+    background: url('https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823') left no-repeat;
+  background-size:cover;
 }
 
-input[type="checkbox"]:checked ~ .checkbox {
-  transition: all 0.3s;
-  border-bottom: 2px solid #ffcc00;
-  border-right: 2px solid #ffcc00;
-}
-
-@keyframes neon {
-  from {
-    text-shadow: 
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+@media (max-width: 500px) {
+  .window {
+    width: 100%;
+    height: 100%;
   }
-
-  to {
-      text-shadow: 
-      0 0 3px #fff,
-      0 0 7px  #fff,
-      0 0 13px  #fff,
-      0 0 17px  #B6FF00,
-      0 0 33px  #B6FF00,
-      0 0 38px  #B6FF00,
-      0 0 48px #B6FF00,
-      0 0 63px #B6FF00;
-    }
-}
-
-@keyframes flicker {
-  0% {
-    text-shadow: 
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
-  }
-
-  2% {
-    text-shadow: none;
-  }
-
-  8% {
-    text-shadow: 
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
-  }
-
-  10% {
-    text-shadow: none;
-  }
-
-  20% {
-    text-shadow: 
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
-  }
-
-  22% {
-    text-shadow: none;
-  }
-
-  24% {
-    text-shadow: 
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
-  }
-
-  28% {
-    text-shadow: none;
-  }
-
-  32% {
-    text-shadow: 
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
-  }
-
-  34% {
-    text-shadow: none;
-  }
-
-  36% {
-    text-shadow: none;
-  }
-
-  42% {
-    text-shadow: none;
-  }
-
-  100% {
-    text-shadow: 
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+  .overlay {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

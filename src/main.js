@@ -7,6 +7,8 @@ import "@/firebase/index";
 Vue.config.productionTip = false;
 import firebase from "firebase/app";
 
+import './index.css'
+
 globalComponents.forEach(component => {
   Vue.component(component.name, component);
 });

@@ -16,15 +16,15 @@ const baseRoutes = [
     component: Login
   },
   {
+    path: '/home',
+    name: 'home',
+    component: Home,
+  },
+  {
     path: '/signup',
     name: 'Signup',
     component: Signup
   },
-  {
-    path: '/home',
-    name: 'home',
-    component: Home,
-  }
 ];
 const routes = [...baseRoutes, ...AdminRoutes];
 
@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
   // eslint-disable-next-line no-console
   console.log("isauthenticated", isAuthenticated);
   if (requiresAuth && !isAuthenticated) {
-    next("/");
+    next("/home");
   } else {
     next();
   }
