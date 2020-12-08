@@ -24,7 +24,7 @@ export default {
     return uploadImage.then(imageUrl => {
       const productObj = { ...product };
       if(imageUrl) productObj['imageUrl'] = imageUrl;
-      return updateDocumnet(PRODUCTS, id, productObj).then(doc => {
+      return updateDocumnet(PRODUCTS, id, productObj).then(() => {
         commit(
           "updateProducts",
           state.products.map( product => {

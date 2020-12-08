@@ -1,27 +1,80 @@
 <template>
-<div>
-<div class='bold-line'></div>
-<div class='container'>
-  <div class='window'>
-    <div class='overlay'></div>
-    <div class='content'>
-      <div class='welcome'>LogIn</div>
-      <div class='subtitle'>Welcome please enter your credentials</div>
-
-      <form id="accesspanel" action="login" method="post" @submit.prevent="pressed">
-      <div class='input-fields'>
-        <input type='email' placeholder='Email' class='input-line full-width' v-model="email" :counter="20" :rules="emailRules" label="Email" required />
-        <input type='password' placeholder='Password' class='input-line full-width' v-model="password" :rules="passwordRules" label="Password" required/>
-
-      </div>
-      <div class='spacing'>or continue to <span class='highlight'><router-link to="/signup"> Sign up</router-link></span></div>
-      <div><button class='ghost-round full-width' @click="pressed">LOG IN</button></div>
-      </form>
-      <div class="error" v-if="error">{{error.message}}</div>
-    </div>
-  </div>
-</div>
-</div>
+<div class="container mx-auto">
+			<div class="flex justify-center px-6 my-12 ">
+				<!-- Row -->
+				<div class="w-full xl:w-3/4 lg:w-11/12 flex shadow-md">
+					<!-- Col -->
+					<div
+						class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
+						style="background-image: url('https://source.unsplash.com/K4mSJ7kc0As/600x800')"
+					></div>
+					<!-- Col -->
+					<div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+						<h3 class="pt-4 text-2xl text-center">Welcome Back!</h3>
+						<form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" @submit.prevent="pressed">
+							<div class="mb-4">
+								<label class="block mb-2 text-sm font-bold text-gray-700" for="username">
+									Username
+								</label>
+								<input
+									class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+									id="username"
+									type="text"
+									placeholder="Username"
+                  v-model="email" :counter="20" :rules="emailRules" label="Email" required
+								/>
+							</div>
+							<div class="mb-4">
+								<label class="block mb-2 text-sm font-bold text-gray-700" for="password">
+									Password
+								</label>
+								<input
+									class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+									id="password"
+									type="password"
+									placeholder="******************"
+                  v-model="password" :rules="passwordRules" label="Password" required
+								/>
+								<p class="text-xs italic text-red-500">Please choose a password.</p>
+							</div>
+							<div class="mb-4">
+								<input class="mr-2 leading-tight" type="checkbox" id="checkbox_id" />
+								<label class="text-sm" for="checkbox_id">
+									Remember Me
+								</label>
+							</div>
+							<div class="mb-6 text-center">
+								<button
+									class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+									type="button"
+                  @click="pressed"
+								>
+									Sign In
+								</button>
+							</div>
+							<hr class="mb-6 border-t" />
+							<div class="text-center">
+								<a
+									class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+									href="./register.html"
+								>
+									Create an Account!
+								</a>
+							</div>
+							<div class="text-center">
+								<a
+									class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+									href="./forgot-password.html"
+								>
+									Forgot Password?
+								</a>
+							</div>
+						</form>
+            <div class="error" v-if="error">{{error.message}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
 </template>
 
 <script>
@@ -41,6 +94,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(data => {
+          // eslint-disable-next-line no-console
           console.log(data);
           alert("Welcome");
           this.$router.replace({ name: "home" });
@@ -55,220 +109,3 @@ export default {
   }
 };
 </script>
-
-<style >
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
-body,
-html {
-  margin: 0;
-  height: 100%;
-}
-
-input {
-  border: none;
-}
-
-button:focus {
-  outline: none;
-}
-
-::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-::-webkit-input-placeholder .input-line:focus +::input-placeholder {
-  color: #fff;
-}
-
-.highlight {
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 400;
-  cursor: pointer;
-  transition: color .2s ease;
-}
-
-.highlight:hover {
-  color: #fff;
-  transition: color .2s ease;
-}
-
-.spacing {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  height: 120px;
-  font-weight: 300;
-  text-align: center;
-  margin-top: 10px;
-  color: rgba(255, 255, 255, 0.65)
-}
-
-.input-line:focus {
-  outline: none;
-  border-color: #fff;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
-}
-
-.ghost-round {
-  cursor: pointer;
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 25px;
-  color: rgba(255, 255, 255, 0.65);
-  -webkit-align-self: flex-end;
-  -ms-flex-item-align: end;
-  align-self: flex-end;
-  font-size: 19px;
-  font-size: 1.2rem;
-  font-family: roboto;
-  font-weight: 300;
-  line-height: 2.5em;
-  margin-top: auto;
-  margin-bottom: 25px;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
-}
-
-.ghost-round:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
-}
-
-.input-line {
-  background: none;
-  margin-bottom: 10px;
-  line-height: 2.4em;
-  color: #fff;
-  font-family: roboto;
-  font-weight: 300;
-  letter-spacing: 0px;
-  letter-spacing: 0.02rem;
-  font-size: 19px;
-  font-size: 1.2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-  -webkit-transition: all .2s ease;
-  transition: all .2s ease;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.input-fields {
-  margin-top: 25px;
-}
-
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background: #eee;
-  height: 100%;
-}
-
-.content {
-  padding-left: 25px;
-  padding-right: 25px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column;
-  -ms-flex-flow: column;
-  flex-flow: column;
-  z-index: 5;
-}
-
-.welcome {
-  font-weight: 200;
-  margin-top: 75px;
-  text-align: center;
-  font-size: 40px;
-  font-size: 2.5rem;
-  letter-spacing: 0px;
-  letter-spacing: 0.05rem;
-}
-
-.subtitle {
-  text-align: center;
-  line-height: 1em;
-  font-weight: 100;
-  letter-spacing: 0px;
-  letter-spacing: 0.02rem;
-}
-
-.menu {
-  background: rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 50px;
-}
-
-.window {
-  z-index: 100;
-  color: #fff;
-  font-family: roboto;
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column;
-  -ms-flex-flow: column;
-  flex-flow: column;
-  box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-  height: 560px;
-  width: 360px;
-  background: #fff;
-  background: url('https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823') top left no-repeat;
-}
-
-.overlay {
-  background: -webkit-linear-gradient(#8CA6DB, #B993D6);
-  background: linear-gradient(#8CA6DB, #B993D6);
-  opacity: 0.85;
-  filter: alpha(opacity=85);
-  height: 560px;
-  position: absolute;
-  width: 360px;
-  z-index: 1;
-}
-
-.bold-line {
-  background: #e7e7e7;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  margin: auto;
-  width: 100%;
-  height: 360px;
-  z-index: 1;
-  opacity:0.1;
-    background: url('https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823') left no-repeat;
-  background-size:cover;
-}
-
-@media (max-width: 500px) {
-  .window {
-    width: 100%;
-    height: 100%;
-  }
-  .overlay {
-    width: 100%;
-    height: 100%;
-  }
-}
-</style>

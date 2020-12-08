@@ -6,8 +6,7 @@ import globalComponents from "@/components/Shared/globalComponents.js";
 import "@/firebase/index";
 Vue.config.productionTip = false;
 import firebase from "firebase/app";
-
-import './index.css'
+import('@/assets/css/tailwind.css')
 
 globalComponents.forEach(component => {
   Vue.component(component.name, component);
