@@ -3,10 +3,10 @@
 
 <div class="grid min-h-screen place-items-center">
   <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-    <h1 class="text-xl font-semibold">Welcome back , <span class="font-normal">sign in to continue</span></h1>
+    <h1 class="text-xl font-semibold">Welcome back , <span class="font-normal">sign Up to continue</span></h1>
     <form class="mt-6" @submit.prevent="pressed">
       <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
-      <input id="email" type="email" name="email" placeholder="john.doe@company.com" autocomplete="email" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" v-model="email" :counter="20" :rules="emailRules" label="Email" required />
+      <input id="email" type="email" name="email" placeholder="ex:james.doe@company.com" autocomplete="email" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" v-model="email" :counter="20" :rules="emailRules" label="Email" required />
       <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
       <input id="password" type="password" name="password" placeholder="********" autocomplete="current-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" v-model="password" :rules="passwordRules" label="Password" required />
       <button @click="pressed" type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
