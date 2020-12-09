@@ -6,7 +6,7 @@
 					<!-- Col -->
 					<div
 						class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-						style="background-image: url('https://source.unsplash.com/K4mSJ7kc0As/600x800')"
+						style="background-image: url('https://images.unsplash.com/photo-1559056961-1f4dbbf9d36a?ixid/600x800')"
 					></div>
 					<!-- Col -->
 					<div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
@@ -35,7 +35,7 @@
 									placeholder="******************"
                   v-model="password" :rules="passwordRules" label="Password" required
 								/>
-								<p class="text-xs italic text-red-500">Please choose a password.</p>
+								
 							</div>
 							<div class="mb-4">
 								<input class="mr-2 leading-tight" type="checkbox" id="checkbox_id" />
@@ -58,7 +58,7 @@
 									class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
 									href="./register.html"
 								>
-									Create an Account!
+								<p><router-link to="/signup">Create an Account!</router-link></p>
 								</a>
 							</div>
 							<div class="text-center">
