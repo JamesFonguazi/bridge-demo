@@ -16,7 +16,7 @@ export default {
     });
   },
   submitEditCategoryForm({ commit, state }, {category, id}) {
-    return updateDocumnet(CATEGORIES, id, category).then(doc => {
+    return updateDocumnet(CATEGORIES, id, category).then(() => {
       commit(
         "updateCategories",
         state.categories.map( cat => {
